@@ -1,8 +1,31 @@
 #include <stdio.h>
-#define BOYUT 7
+
 //Dilayda Akpınar
 //2420161048
 //https://www.btkakademi.gov.tr/portal/certificate/validate?certificateId=yjahzmVVnl
+
+
+int ikili_arama(int dizi[], int BOYUT, int search, int ilk_ind, int son_ind) {
+	int orta_ind = (ilk_ind + son_ind) / 2;
+	
+	
+	if (search == dizi[orta_ind]) {
+		return orta_ind;
+	}
+	
+	else if (search > dizi[orta_ind] && (son_ind-ilk_ind) > 0 ) {
+		return ikili_arama(dizi, BOYUT, search, orta_ind+1, son_ind);
+	}
+	
+	else if (search < dizi[orta_ind] && (son_ind-ilk_ind) > 0) {
+		return ikili_arama(dizi, BOYUT, search, 0, orta_ind-1);
+	}
+	
+	else {
+		return -1;
+	}
+}
+
 
 
 void dizi_yazdir(int dizi[],int n){
@@ -61,12 +84,27 @@ void secmeli_siralama(int dizi[],int n){
 
 
 int main(){
-	
-	int dizi[BOYUT]={24,34,12,11,6,8,55};
-	
-	
+	int aranan,sonuc;
+	int dizi[]={24,34,12,11,6,8,55};
+	int BOYUT = sizeof(dizi) / sizeof(dizi[0]);	
 	printf("Siralama Öncesi: \n");
 	dizi_yazdir(dizi,BOYUT);
+	printf("Aramak istediginiz deger: ");
+	scanf("%d", &aranan);
+	
+	
+	
+	sonuc = ikili_arama(dizi, BOYUT, aranan, 0, BOYUT-1);
+	
+	if (sonuc == -1) {
+		printf("Aradiginiz deger %d, dizide bulunamadi!\n", aranan);
+	}
+	else {
+		printf("Aradiginiz deger %d, dizinin %d. indisinde bulundu!\n", aranan, sonuc);
+	}
+		
+	
+
 	secmeli_siralama(dizi,BOYUT);
 	printf("Siralama Sonrasi: \n");
 	 dizi_yazdir(dizi,BOYUT);
