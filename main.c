@@ -1,13 +1,12 @@
 #include <stdio.h>
 
-//Dilayda Akpınar
+//Dilayda Akpinar
 //2420161048
 //https://www.btkakademi.gov.tr/portal/certificate/validate?certificateId=yjahzmVVnl
 
 
 int ikili_arama(int dizi[], int BOYUT, int search, int ilk_ind, int son_ind) {
 	int orta_ind = (ilk_ind + son_ind) / 2;
-	
 	
 	if (search == dizi[orta_ind]) {
 		return orta_ind;
@@ -27,7 +26,6 @@ int ikili_arama(int dizi[], int BOYUT, int search, int ilk_ind, int son_ind) {
 }
 
 
-
 void dizi_yazdir(int dizi[],int n){
 	printf("DIZI: \n");
 	int i;
@@ -37,63 +35,46 @@ void dizi_yazdir(int dizi[],int n){
 	printf("\n");
 }
 
-void takas(int *ap,int *bp){
-	
+void takas(int *ap,int *bp){	
 	int gecici=*ap;
 	*ap=*bp;
-	*bp=gecici;
-	
-	
+	*bp=gecici;	
 }
 
-int max_hesap(int dizi[],int n,int bas){
+int min_hesap(int dizi[],int n,int bas){
 	int i;
-	int max_eleman=dizi[bas];
-	int max_ind=bas;
+	int min_eleman=dizi[bas];
+	int min_ind=bas;
 	
 	for(i=bas+1;i<n;i++){
-		if(dizi[i]>max_eleman){
-			max_eleman=dizi[i];
-			max_ind=i;
+		if(dizi[i]<min_eleman){
+			min_eleman=dizi[i];
+			min_ind=i;
 		}
 	}
-	return max_ind;
+	return min_ind;
 }
 
-
-
-
 void secmeli_siralama(int dizi[],int n){
-	int i,max;
-	
+	int i,mini;	
 	for(i=0;i<n;i++){
-		max=max_hesap(dizi,n,i);
-		takas(dizi+i,dizi+max);
-	
-		printf("iter.%2d: \n",i+1);
-		dizi_yazdir(dizi,n);
+		mini=min_hesap(dizi,n,i);
+		takas(dizi+i,dizi+mini);
 	}
-
-		
-		
-	}
-
-
-
-
-
+}
 
 int main(){
 	int aranan,sonuc;
 	int dizi[]={24,34,12,11,6,8,55};
 	int BOYUT = sizeof(dizi) / sizeof(dizi[0]);	
-	printf("Siralama Öncesi: \n");
-	dizi_yazdir(dizi,BOYUT);
+	
 	printf("Aramak istediginiz deger: ");
 	scanf("%d", &aranan);
 	
-	
-	
+
+	secmeli_siralama(dizi,BOYUT);
+	printf("Siralama Sonrasi: \n");
+	dizi_yazdir(dizi,BOYUT);
 	sonuc = ikili_arama(dizi, BOYUT, aranan, 0, BOYUT-1);
 	
 	if (sonuc == -1) {
@@ -102,11 +83,7 @@ int main(){
 	else {
 		printf("Aradiginiz deger %d, dizinin %d. indisinde bulundu!\n", aranan, sonuc);
 	}
-		
-	
-
-	secmeli_siralama(dizi,BOYUT);
-	printf("Siralama Sonrasi: \n");
-	 dizi_yazdir(dizi,BOYUT);
+			 
+	 
 	 return 0;
 }
