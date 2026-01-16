@@ -2,8 +2,7 @@
 #define BOYUT 7
 //Dilayda Akpınar
 //2420161048
-//
-https://www.btkakademi.gov.tr/portal/certificate/validate?certificateId=yjahzmVVnl
+//https://www.btkakademi.gov.tr/portal/certificate/validate?certificateId=yjahzmVVnl
 
 
 void dizi_yazdir(int dizi[],int n){
